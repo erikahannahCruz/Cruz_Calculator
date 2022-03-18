@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText var1txt, var2txt ; //declared 2 editText boxes
-    Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnModulo ; //declared 5 buttons
+    EditText var1txt, var2txt ;
+    Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnModulo , btnClear;
     TextView txtAnswer ; //text view for answer
 
     double variable1, variable2, answer;
@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMultiply = findViewById(R.id.btnMultiply) ;
         btnDivide = findViewById(R.id.btnDivide) ;
         btnModulo = findViewById(R.id.btnModulo) ;
+        btnClear = findViewById(R.id.btnClear) ;
 
         // input text boxes
         var1txt = findViewById(R.id.txtBox1) ;
         var2txt = findViewById(R.id.txtBox2) ;
-
 
         //answer display
         txtAnswer = findViewById(R.id.txtAnswer) ;
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMultiply.setOnClickListener(this);
         btnDivide.setOnClickListener(this);
         btnModulo.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
 
     }
 
@@ -55,29 +56,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()) {
             case R.id.btnAdd :
                addition();
-
                 break ;
 
             case R.id.btnSubtract :
                 subtract();
-
                 break ;
 
             case R.id.btnMultiply :
                 multiply();
-
                 break ;
 
             case R.id.btnDivide :
                 divide();
-
                 break ;
 
             case R.id.btnModulo :
                 modulo();
-
                 break ;
 
+            case R.id.btnClear :
+                clear();
+                break ;
         }
 
 
@@ -112,6 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     public void modulo() {
         answer = variable1 % variable2 ;
+        txtAnswer.setText(Double.toString(answer));
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void clear() {
+        variable1 = 0 ;
+        variable2 = 0 ;
+        answer = 0 ;
+
+        var1txt.setText("") ;
+        var2txt.setText("") ;
         txtAnswer.setText(Double.toString(answer));
 
     }
