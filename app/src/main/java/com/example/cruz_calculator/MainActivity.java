@@ -2,6 +2,7 @@ package com.example.cruz_calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +13,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText var1txt, var2txt ; //declared 2 editText boxes
     Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnModulo ; //declared 5 buttons
-    TextView answerText ; //text view for answer
+    TextView txtAnswer ; //text view for answer
 
-    double variable1, variable2 ;
+    double variable1, variable2, answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDivide = findViewById(R.id.btnDivide) ;
         btnModulo = findViewById(R.id.btnModulo) ;
 
+        // input text boxes
+        var1txt = findViewById(R.id.txtBox1) ;
+        var2txt = findViewById(R.id.txtBox2) ;
+
+
         //answer display
-        answerText = findViewById(R.id.txtAnswer) ;
+        txtAnswer = findViewById(R.id.txtAnswer) ;
 
         btnAdd.setOnClickListener(this);
         btnSubtract.setOnClickListener(this);
@@ -42,36 +48,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        // input text boxes
-        var1txt = findViewById(R.id.txtBox1) ;
-        var2txt = findViewById(R.id.txtBox2) ;
+        variable1 = Double.parseDouble(String.valueOf(var1txt.getText())) ;
+        variable2 = Double.parseDouble(String.valueOf(var2txt.getText())) ;
 
-        variable1 = Double.parseDouble(var1txt.getText().toString()) ;
-        variable2 = Double.parseDouble(var2txt.getText().toString()) ;
 
         switch(v.getId()) {
             case R.id.btnAdd :
-                answerText.setText(Double.toString(variable1 + variable2));
+               addition();
+
                 break ;
 
             case R.id.btnSubtract :
-                answerText.setText(Double.toString(variable1 - variable2));
+                subtract();
+
                 break ;
 
             case R.id.btnMultiply :
-                answerText.setText(Double.toString(variable1 * variable2));
+                multiply();
+
                 break ;
 
             case R.id.btnDivide :
-                answerText.setText(Double.toString(variable1 / variable2));
+                divide();
+
                 break ;
 
             case R.id.btnModulo :
-                answerText.setText(Double.toString(variable1 % variable2));
+                modulo();
+
                 break ;
 
         }
 
+
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    public void addition() {
+            answer = variable1 + variable2 ;
+            txtAnswer.setText(Double.toString(answer));
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void subtract() {
+        answer = variable1 - variable2 ;
+        txtAnswer.setText(Double.toString(answer));
+
+    }
+    @SuppressLint("SetTextI18n")
+    public void multiply() {
+        answer = variable1 * variable2 ;
+        txtAnswer.setText(Double.toString(answer));
+
+    }
+    @SuppressLint("SetTextI18n")
+    public void divide() {
+        answer = variable1 / variable2 ;
+        txtAnswer.setText(Double.toString(answer));
+
+    }
+    @SuppressLint("SetTextI18n")
+    public void modulo() {
+        answer = variable1 % variable2 ;
+        txtAnswer.setText(Double.toString(answer));
 
     }
 
